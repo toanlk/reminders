@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-import { Progress } from "./Progress";
-
+import Typography from 'material-ui/Typography';
 import { LinearProgress } from 'material-ui/Progress';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
 
 import WorkIcon from 'material-ui-icons/Work';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
@@ -12,31 +10,31 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
-export interface TodoCategoryState { }
-export interface TodoCategoryProps extends React.Props<TodoCategory> { }
+export interface CategoryState { }
+export interface CategoryProps extends React.Props<Category> { onSelectCategory: () => void }
 
 //// Class ///////////////////////////////////////////////////////////////////////////////
 
-export class TodoCategory extends React.Component<TodoCategoryProps, TodoCategoryState> {
+export class Category extends React.Component<CategoryProps, CategoryState> {
 
-    constructor(props: TodoCategoryProps) {
+    constructor(props: CategoryProps) {
         super(props);
         this.state = this.getInitialState();
     }
 
-    getInitialState(): TodoCategoryState {
-        return {}
+    getInitialState(): CategoryState {
+        return { }
     }
 
     componentDidMount() {
-        console.log("TodoCategory::componentDidMount() " + this.state);
+        console.log("Category::componentDidMount() " + this.state);
     }
 
     //// render ///////////////////////////////////////////////////////////////////////////////
 
     render() {
         return (
-            <Card className="component-category">
+            <Card className="component-category" onClick={() => this.onSelectCategory()}>
                 <CardContent>
                     <WorkIcon className="icon-category" />
                     <MoreVertIcon className="icon-vertical" />
@@ -61,4 +59,9 @@ export class TodoCategory extends React.Component<TodoCategoryProps, TodoCategor
 
     //// logic ///////////////////////////////////////////////////////////////////////////////
 
+    onSelectCategory() {
+        console.log("Category::onSelectCategory() ");
+        
+        this.props.onSelectCategory();
+    }
 }
