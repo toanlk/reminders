@@ -26,10 +26,6 @@ export class Category extends React.Component<CategoryProps, CategoryState> {
         return { }
     }
 
-    componentDidMount() {
-        console.log("Category::componentDidMount() " + this.state);
-    }
-
     //// render ///////////////////////////////////////////////////////////////////////////////
 
     render() {

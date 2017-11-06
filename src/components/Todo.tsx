@@ -42,7 +42,7 @@ export class Todo extends React.Component<TodoProps, TodoState> {
 
     render() {
 
-        console.log("Todo::render() " + this.props.id + ": " + this.props.task);
+        //console.log("Todo::render() " + this.props.id + ": " + this.props.task);
 
         return (
             <ListItem key={this.props.id} dense button className="todo"

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Moment from 'react-moment';
 
 import MenuIcon from 'material-ui-icons/Menu';
 import SearchIcon from 'material-ui-icons/Search';
@@ -7,8 +6,8 @@ import Avatar from 'material-ui/Avatar';
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
-export interface HeaderState {}
-export interface HeaderProps extends React.Props<Header> {}
+export interface HeaderState { numbTask: number }
+export interface HeaderProps extends React.Props<Header> { }
 
 //// Class ///////////////////////////////////////////////////////////////////////////////
 
@@ -20,17 +19,15 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     }
 
     getInitialState(): HeaderState {
-        return {}
-    }
-
-    componentDidMount() {
-        console.log("Main::componentDidMount() " + this.state);
+        let todos = JSON.parse(localStorage.getItem('todos'));
+        let numbTask = todos.length;
+        return { numbTask: numbTask }
     }
 
     //// render ///////////////////////////////////////////////////////////////////////////////
 
     render() {
-        const date = new Date();
+        const date = getToday();
 
         return (
             <div className="component-header">
@@ -41,15 +38,15 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                 </div>
                 <div className="row component-summary">
                     <div className="col-12">
-                    <Avatar alt="Toan" src="./src/assets/img/6931504.png" className="avatar" />
+                        <Avatar alt="Toan" src="./src/assets/img/6931504.png" className="avatar" />
                     </div>
                     <div className="col-12">
                         <h1>Hello, Toan</h1>
                         <div className="desc">Look like feed good</div>
-                        <div className="desc">You have 3 tasks to do today</div>
+                        <div className="desc">You have {this.state.numbTask} tasks to do today</div>
                     </div>
                     <div className="col-12 date">
-                        Today: <Moment format="MMMM DD, YYYY">{date.toString()}</Moment>
+                        Today: {date}
                     </div>
                 </div>
             </div>
@@ -57,5 +54,16 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     }
 
     //// logic ///////////////////////////////////////////////////////////////////////////////
+}
 
+export function getToday() {
+    let objToday = new Date(),
+        dayOfMonth = (objToday.getDate() < 10) ? '0' + objToday.getDate() : objToday.getDate(),
+        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+        curMonth = months[objToday.getMonth()],
+        curYear = objToday.getFullYear();
+
+    let today: string = curMonth + " " + dayOfMonth + ", " + curYear;
+
+    return today;
 }

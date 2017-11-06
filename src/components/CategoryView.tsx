@@ -8,11 +8,12 @@ import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-
 import Checkbox from 'material-ui/Checkbox';
 
 import { Todo } from './Todo';
+import { AddTodo } from "./AddTodo";
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
-export interface CategoryViewState { }
-export interface CategoryViewProps extends React.Props<CategoryView> { todos: any, onCloseCategory: () => void }
+export interface CategoryViewState { is_add_todo: boolean, todos: any }
+export interface CategoryViewProps extends React.Props<CategoryView> { onCloseCategory: () => void }
 
 //// Class ///////////////////////////////////////////////////////////////////////////////
 
@@ -24,27 +25,31 @@ export class CategoryView extends React.Component<CategoryViewProps, CategoryVie
     }
 
     getInitialState(): CategoryViewState {
-        return { }
+        let todos = JSON.parse(localStorage.getItem('todos'));
+        return { is_add_todo: false, todos: todos }
     }
 
-    componentDidMount() {
-        console.log("CategoryView::componentDidMount() " + this.state);
-    }
+    // componentDidMount() {
+    //     console.log("CategoryView::componentDidMount() " + this.state);
+    // }
 
     //// render ///////////////////////////////////////////////////////////////////////////////
 
     render() {
         console.log("CategoryView::render() ");
-        console.log(this.props.todos);
+        //console.log(this.props.todos);
+
+        if (this.state.is_add_todo) {
+            return <AddTodo onCloseAddTodo={() => this.onCloseAddTodo()} onAddedTodo={() => this.onAddedTodo()} />;
+        }
 
         let todos = '';
-        
-        if(this.props.todos) {
-            todos = this.props.todos.map((todo: { id: number, task: string }) => {
+
+        if (this.state.todos) {
+            todos = this.state.todos.map((todo: { id: number, task: string }) => {
                 return (<Todo id={todo.id} task={todo.task} />)
             });
         }
-        
 
         return (
             <div className="component-category-view">
@@ -57,7 +62,7 @@ export class CategoryView extends React.Component<CategoryViewProps, CategoryVie
                     {todos}
                 </List>
 
-                <Button fab color="primary" aria-label="add" className="btnAdd">
+                <Button fab color="primary" className="btnAdd" onClick={() => this.onOpenAddTodo()}>
                     <AddIcon className="iconAdd" />
                 </Button>
             </div>
@@ -65,6 +70,20 @@ export class CategoryView extends React.Component<CategoryViewProps, CategoryVie
     }
 
     //// logic ///////////////////////////////////////////////////////////////////////////////
+
+    onOpenAddTodo() {
+        this.setState({ is_add_todo: true });
+    }
+
+    onCloseAddTodo() {
+        this.setState({ is_add_todo: false });
+    }
+
+    onAddedTodo() {
+        let todos = JSON.parse(localStorage.getItem('todos'));
+        this.setState({ is_add_todo: false, todos: todos });
+    }
+
     onCloseCategory() {
         this.props.onCloseCategory();
     }

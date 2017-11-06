@@ -4,12 +4,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import CloseIcon from 'material-ui-icons/Close';
 import Typography from 'material-ui/Typography';
-import TextField from 'material-ui/TextField';
+import Input from 'material-ui/Input';
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
-export interface AddTodoState { }
-export interface AddTodoProps extends React.Props<AddTodo> { }
+export interface AddTodoState { task: string }
+export interface AddTodoProps extends React.Props<AddTodo> { onCloseAddTodo: () => void, onAddedTodo: () => void }
 
 //// Class ///////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ export class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
     }
 
     getInitialState(): AddTodoState {
-        return {}
+        return { task: '' }
     }
 
     //// render ///////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ export class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
     render() {
         return (
             <div className="component-add-todo">
-                <CloseIcon className="btnClose" onClick={this.onClose}/>
+                <CloseIcon className="btnClose" onClick={() => this.onCloseAddTodo()} />
                 <Typography type="headline" component="h1" className="title-task">
                     New Task
                 </Typography>
@@ -37,9 +37,10 @@ export class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
                     <Typography type="body1" className="title-text">
                         What tasks are you planning to perform?
                     </Typography>
-                    <TextField id="txtTask" className="txt-task" margin="normal"/>
+                    <Input type="text" autoFocus id="txtTask" className="txt-task"
+                        onChange={(e) => this.setState({task: e.target.value})} />
                 </form>
-                <Button className="btnAdd" onClick={this.onAddTodo}>
+                <Button className="btnAdd" onClick={() => this.onAddTodo()}>
                     <AddIcon className="iconAdd" />
                 </Button>
             </div>
@@ -48,14 +49,25 @@ export class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
 
     //// logic ///////////////////////////////////////////////////////////////////////////////
 
-    onClose() {
-
+    onCloseAddTodo() {
+        this.props.onCloseAddTodo();
     }
 
     onAddTodo() {
         console.log("AddTodo::onAddTodo() ");
 
+        const uuidv4 = require('uuid/v4');
         let todos = JSON.parse(localStorage.getItem('todos'));
-        console.log(todos); 
+
+        todos = [
+            ...todos, {
+                "id": uuidv4(),
+                "task": this.state.task
+            }
+        ];
+        localStorage.setItem('todos', JSON.stringify(todos));
+
+        console.log(todos);
+        this.props.onAddedTodo();
     }
 }

@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Header } from "./Header";
 import { Category } from "./Category";
 import { CategoryView } from "./CategoryView";
-import { AddTodo } from "./AddTodo";
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
@@ -45,7 +44,7 @@ export class Main extends React.Component<MainProps, MainState> {
         let bgColor = "#5A89E6";
 
         if (this.state.is_category_view) {
-            main_view = <CategoryView todos={this.state.todos} onCloseCategory={() => this.onCloseCategory()} />;
+            main_view = <CategoryView onCloseCategory={() => this.onCloseCategory()} />;
             bgColor = "#ffffff";
             header_view = null;
         }

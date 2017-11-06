@@ -303,8 +303,9 @@ body {
 
 .component-add-todo .txt-task {
     width: 100%;
-    margin-top: 0
+    margin-top: 0;
 }
+.component-add-todo .txt-task input { font-family: "Quicksand" }
 
 .component-add-todo .title-text {
     color: #999999;
