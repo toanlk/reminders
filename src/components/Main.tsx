@@ -50,7 +50,7 @@ export class Main extends React.Component<MainProps, MainState> {
 
         if (storeCategory.category_selected) {
 
-            main_view = <TodoListView
+            main_view = <TodoListView 
                 store={store}
                 storeCategory={storeCategory} />;
 

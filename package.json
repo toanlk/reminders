@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Reminders App",
   "main": "index.tsx",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "toanlk",
   "license": "ISC",
   "dependencies": {
@@ -22,7 +19,8 @@
     "moment": "^2.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "webpack-dev-server": "^2.9.4"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.3.0",
@@ -32,5 +30,9 @@
     "source-map-loader": "^0.2.3",
     "time-grunt": "^1.4.0",
     "typescript": "^2.6.1"
-  }
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --progress",
+    "build": "webpack"
+   }
 }

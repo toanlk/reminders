@@ -31,4 +31,5 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
+    devServer: { open: true, port: 3000 }
 };
