@@ -1,16 +1,32 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
-import { Header } from "./Header";
-import { Category } from "./Category";
-import { CategoryView } from "./CategoryView";
+import { Header } from "./View/Header";
+import { TodoListView } from "./View/TodoList";
+import { CategoryListView } from "./View/CategoryList";
+
+import { TodoList } from "./Controller/TodoList";
+import { Category } from "./Controller/Category";
+import { CategoryList } from "./Controller/CategoryList";
 
 //// Props and States /////////////////////////////////////////////////////////////////////
 
-export interface MainState { category: any, todos: any, is_category_view: boolean }
+export interface MainState { }
 export interface MainProps extends React.Props<Main> { }
 
 //// Class ///////////////////////////////////////////////////////////////////////////////
 
+const store = new TodoList();
+store.todos = require('../storage/todo.json');
+
+const storeCategory = new CategoryList();
+let categories = require('../storage/category.json');
+
+categories.map((cat: any) => {
+    storeCategory.categories.push(new Category(cat.id, cat.name, cat.number_of_tasks, cat.task_completed));
+});
+
+@observer
 export class Main extends React.Component<MainProps, MainState> {
 
     constructor(props: MainProps) {
@@ -19,18 +35,7 @@ export class Main extends React.Component<MainProps, MainState> {
     }
 
     getInitialState(): MainState {
-
-        let category = require('../storage/category.json');
-        if (category) {
-            localStorage.setItem('category', JSON.stringify(category));
-        }
-
-        let todos = require('../storage/todo.json');
-        if (todos) {
-            localStorage.setItem('todos', JSON.stringify(todos));
-        }
-
-        return { category: category, todos: todos, is_category_view: false }
+        return {}
     }
 
     //// render ///////////////////////////////////////////////////////////////////////////////
@@ -38,32 +43,31 @@ export class Main extends React.Component<MainProps, MainState> {
     render() {
         console.log("Main::render()");
 
-        let main_view = <Category onSelectCategory={() => this.onSelectCategory()} />;
-        let header_view = <Header />;
+        let main_view = <CategoryListView store={storeCategory} />;
+        let header_view = <Header store={store} />;
 
-        let bgColor = "#5A89E6";
+        let bgColor = "#3f51b5";
 
-        if (this.state.is_category_view) {
-            main_view = <CategoryView onCloseCategory={() => this.onCloseCategory()} />;
+        if (storeCategory.category_selected) {
+
+            main_view = <TodoListView
+                store={store}
+                storeCategory={storeCategory} />;
+
             bgColor = "#ffffff";
             header_view = null;
         }
 
         return (
-            <div className="container component-app" style={{ backgroundColor: bgColor }}>
-                {header_view}
-                {main_view}
+            <div className="component-app" style={{ backgroundColor: bgColor }}>
+                <div className="container">
+                    {header_view}
+                    {main_view}
+                </div>
             </div>
         );
     }
 
     //// logic ///////////////////////////////////////////////////////////////////////////////
 
-    onSelectCategory() {
-        this.setState({ is_category_view: true });
-    }
-
-    onCloseCategory() {
-        this.setState({ is_category_view: false });
-    }
 }

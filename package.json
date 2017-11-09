@@ -17,6 +17,8 @@
     "grunt-webpack": "^3.0.2",
     "material-ui": "^1.0.0-beta.19",
     "material-ui-icons": "^1.0.0-beta.17",
+    "mobx": "^3.3.1",
+    "mobx-react": "^4.3.4",
     "moment": "^2.19.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -26,6 +28,7 @@
     "awesome-typescript-loader": "^3.3.0",
     "grunt-contrib-cssmin": "^2.2.1",
     "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "^1.0.0",
     "source-map-loader": "^0.2.3",
     "time-grunt": "^1.4.0",
     "typescript": "^2.6.1"

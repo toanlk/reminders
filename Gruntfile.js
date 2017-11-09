@@ -51,12 +51,22 @@ module.exports = function (grunt) {
                 }
             },
 
+            watch: {
+                scripts: {
+                    files: ['**/*.tsx'],
+                    tasks: ['webpack:app'],
+                    options: {
+                        spawn: false,
+                    },
+                },
+            },
         });
 
     grunt.loadNpmTasks("grunt-webpack");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask("print-time", function () {
         var today = new Date();
@@ -67,7 +77,9 @@ module.exports = function (grunt) {
         //"clean:app",
         //"copy:app",
         "webpack:app",
+        //"watch",
         //"uglify:dev",
         "print-time"
+        // 0.50774297
     ]);
 };

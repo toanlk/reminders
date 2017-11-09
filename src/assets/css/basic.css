@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    height: 100%;
 }
 
 
@@ -32,12 +31,11 @@ body {
    ========================================================================== */
 
 #root {
-    height: 100%;
+    width: 100%;
 }
 
 .component-app {
-    height: 100%;
-    background-color: #ffffff
+    overflow: hidden
 }
 
 
@@ -116,6 +114,7 @@ body {
     margin-top: 10px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
     border-radius: 4px !important;
 }
 
@@ -127,7 +126,7 @@ body {
     position: absolute;
     left: 15px;
     top: 16px;
-    color: #5A89E6;
+    color: #3f51b5;
     border: 1px solid #eeeeee;
     padding: 4px 6px;
     border-radius: 50%;
@@ -167,10 +166,6 @@ body {
     background-color: #F2F2F2 !important;
 }
 
-.progress-bar .MuiLinearProgress-primaryColorBar-4 {
-    background-color: #007bff !important;
-}
-
 .progress-bar-label {
     position: relative;
     padding-right: 40px
@@ -203,7 +198,7 @@ body {
     height: 16px !important
 }
 
-.iconBack {
+.iconBack, .iconMore {
     color: #6D6D6D;
     width: 16px !important;
     height: 16px !important
@@ -218,11 +213,12 @@ body {
 
 .component-category-view .btnMoreIcon {
     right: 0;
-    top: 15px
+    top: 15px;
+    position: absolute !important
 }
 
 .component-category-view .btnAdd {
-    background-color: #5A89E6 !important;
+    background-color: #3f51b5 !important;
     position: fixed !important;
     bottom: 30px;
     right: 20px;
@@ -235,24 +231,18 @@ body {
     height: 18px !important
 }
 
-.todo-list {
-    padding-top: 50px !important
-}
-
 .todo {
     padding: 0 !important;
-    padding-left: 10px !important;
-    margin-right: -15px
 }
 
-.todo .MuiIconButton-root-120 {
+.todo .MuiIconButton-root-120x {
     width: 30px;
     height: 30px;
     font-size: 16px;
     color: #aaaaaa
 }
 
-.todo .MuiListItemText-root-129 {
+.todo .MuiListItemText-root-129x {
     padding: 0;
     border-bottom: 1px solid #f1f1f1;
     padding-bottom: 12px;
@@ -263,6 +253,33 @@ body {
 
 .todo h3 {
     font-family: inherit
+}
+
+.component-category-view .component-cat-overview {
+    padding: 0 15px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+.component-category-view .component-cat-overview .cat-space { min-height: 20px }
+
+.component-category-view .component-cat-overview .icon-category {
+    color: #3f51b5;
+    border: 1px solid #eeeeee;
+    padding: 4px 6px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px
+}
+
+.component-category-view .component-cat-overview .numb-task {
+    font-size: 12px;
+    color: #999999;
+    font-family: inherit
+}
+.component-category-view .component-cat-overview .title-task {
+    font-family: inherit;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 
@@ -291,7 +308,7 @@ body {
 }
 
 .component-add-todo .btnAdd {
-    background-color: #5A89E6 !important;
+    background-color: #3f51b5 !important;
     color: #ffffff !important;
     width: 100% !important;
     position: fixed !important;
@@ -302,10 +319,12 @@ body {
 }
 
 .component-add-todo .txt-task {
-    width: 100%;
     margin-top: 0;
 }
-.component-add-todo .txt-task input { font-family: "Quicksand" }
+
+.component-add-todo .txt-task input {
+    font-family: "Quicksand"
+}
 
 .component-add-todo .title-text {
     color: #999999;
@@ -313,5 +332,11 @@ body {
     font-family: inherit;
     margin-top: 30px
 }
-.MuiInput-inkbar-32:after { background-color: #5A89E6 !important }
-.MuiInput-underline-38:before { background-color: #cccccc !important }
+
+.MuiInput-inkbar-32:after {
+    background-color: #3f51b5 !important
+}
+
+.MuiInput-underline-38:before {
+    background-color: #cccccc !important
+}

@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Work",
-        "number_of_tasks": 12,
+        "number_of_tasks": 5,
         "task_completed": 2,
         "color": "",
         "icon": ""
@@ -10,8 +10,8 @@
     {
         "id": 2,
         "name": "Personal",
-        "number_of_tasks": 9,
-        "task_completed": 2,
+        "number_of_tasks": 3,
+        "task_completed": 1,
         "color": "",
         "icon": ""
     },
